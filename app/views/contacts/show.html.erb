@@ -1,11 +1,7 @@
-<h1><%= @contact.first_name %> <%= @contact.last_name %></h1>
+<h1><%= @contact.full_name %></h1>
 <h2><%= @contact.email %></h2>
-<h3><%= @contact.phone_number %></h3> 
-
+<h3><%= @contact.japan_number %></h3> 
+<h5>Created <%= @contact.friendly_time %></h5>
 <a href="/contacts">Back to list</a>
-<p>
-<a href="/contacts/<%=@contact.id%>/edit">Edit this contact</a>
-</p>
-<div>
-<%= link_to "Delete this contact", "/contacts/#{@contact.id}", method: :delete %>
-</div>
+<p><a href="/contacts/<%=@contact.id%>/edit">Edit this contact</a></p>
+<p><%= link_to "Delete this contact", "/contacts/#{@contact.id}", method: :delete %></p>

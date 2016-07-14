@@ -1,7 +1,7 @@
-<h1>Here is the list!<h1> 
 
-<p><% @contacts.each do |contact|%>
-<a href="/contacts/<%=contact.id%>"><h2><%= contact.first_name %> <%= contact.last_name %></h2></a>
+<h1>Here is the list! <a href='/contacts/new'><button type="button" class="btn btn-default btn-lg">Add a contact</button></a></h1>
+<% @contacts.each do |contact|%>
+<h2><a href="/contacts/<%=contact.id%>"><%= contact.first_name %> <%= contact.last_name %></a></h2>
 <h4><%=contact.email%></h4>
 <h4><%=contact.phone_number %></h4> 
 

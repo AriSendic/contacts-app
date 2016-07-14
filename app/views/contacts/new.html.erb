@@ -1,18 +1,20 @@
 <h1>Enter your new contact</h1>
+<h4>
 <%= form_tag '/contacts', method: :post do %>
-  <div>
-    <%= label_tag :First %>
+  <div class="form-group">
+    <%= label_tag :First, "please enter the first name" %>
     <%= text_field_tag :first_name %>
   </div>
-  <div> <%= label_tag :Last %>
+  <div class="form-group">
+    <%= label_tag :Last, "please enter the last name" %>
     <%= text_field_tag :last_name %>
   </div>
-  <div>
-  <%= label_tag :Email %>
-    <%= text_field_tag :email %>
+  <div class="form-group">
+  <%= label_tag :Email, "please enter the email" %>
+    <%= text_field_tag :email%>
   </div>
-  <div>
-  <%= label_tag :Phone %>
+  <div class="form-group">
+  <%= label_tag :Phone, "please enter the phone number" %>
     <%= text_field_tag :phone_number %>
   </div>
   <div>
@@ -20,3 +22,4 @@
  
   </div>
 <% end %>
+</h4>

@@ -1,6 +1,13 @@
 class ContactsController < ApplicationController
   def index
-    @contacts = Contact.all
+    #  sort_attribute = params[:sort]
+    @contacts = current_user.contacts
+    if params[:search_terms]
+      @contacts = Contact.where("first_name LIKE ? or last_name LIKE ?", "%#{params[:search_terms]}%", "%#{params[:search_terms]}%")  
+    end
+    if @contacts.empty?
+      flash[:success] = "Sorry, no results." 
+    end
     render 'index.html.erb'
   end
   
@@ -12,9 +19,12 @@ class ContactsController < ApplicationController
   def create
     contact = Contact.new(
       first_name: params['first_name'],
+      middle_name: params['middle_name'],
       last_name: params['last_name'],
       phone_number: params['phone_number'],
-      email: params['email']
+      email: params['email'],
+      bio: params['bio'],
+      user_id: current_user.id
     )
     contact.save
     flash[:success] = "Contact successfuly added"
@@ -35,6 +45,7 @@ class ContactsController < ApplicationController
     contact = Contact.find_by(id: params['id'])
     contact.update(
       first_name: params['first_name'],
+      middle_name: params['middle_name'],
       last_name: params['last_name'],
       email: params['email'],
       phone_number: params['phone_number']

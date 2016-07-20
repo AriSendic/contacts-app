@@ -1,14 +1,18 @@
 class ContactsController < ApplicationController
   def index
     #  sort_attribute = params[:sort]
-    @contacts = current_user.contacts
-    if params[:search_terms]
-      @contacts = Contact.where("first_name LIKE ? or last_name LIKE ?", "%#{params[:search_terms]}%", "%#{params[:search_terms]}%")  
+    if current_user  
+      if params[:search_terms]
+        @contacts = Contact.where("last_name LIKE ? and user_id=?", "%#{params[:search_terms]}%", current_user.id)
+        render 'index.html.erb'    
+      else
+        @contacts = current_user.contacts
+        render 'index.html.erb'
+      end
+    else
+      flash[:warning] = "You must be logged in to see this page!"
+      redirect_to '/login'
     end
-    if @contacts.empty?
-      flash[:success] = "Sorry, no results." 
-    end
-    render 'index.html.erb'
   end
   
   def new

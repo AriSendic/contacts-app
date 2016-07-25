@@ -2,6 +2,12 @@
 <h2><%= @contact.email %></h2>
 <h3><%= @contact.japan_number %></h3> 
 <h5>Created <%= @contact.friendly_time %></h5>
+<h4>Belongs to these lists: <h4>
+<!-- @contact.groups.pluck(:name) -->
+<p><% @contact.groups.each do |group|%>
+<%= group.name+ ", " %>
+<%end%>
+</p>
 <a href="/contacts">Back to list</a>
 <p><a href="/contacts/<%=@contact.id%>/edit">Edit this contact</a></p>
 <p><%= link_to "Delete this contact", "/contacts/#{@contact.id}", method: :delete %></p>

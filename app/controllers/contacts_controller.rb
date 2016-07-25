@@ -3,8 +3,10 @@ class ContactsController < ApplicationController
     #  sort_attribute = params[:sort]
     if current_user  
       if params[:search_terms]
-        @contacts = Contact.where("last_name LIKE ? and user_id=?", "%#{params[:search_terms]}%", current_user.id)
+        @contacts = Contact.where("user_id=? and last_name LIKE ? or first_name LIKE ? ", current_user.id, "%#{params[:search_terms]}%", "%#{params[:search_terms]}%")  
         render 'index.html.erb'    
+      elsif params[:groups]
+        @contacts = Group.find_by(name: params[:groups]).contacts 
       else
         @contacts = current_user.contacts
         render 'index.html.erb'

@@ -1,5 +1,7 @@
 class Contact < ActiveRecord::Base
   belongs_to :user
+  has_many :contact_groups
+  has_many :groups, through: :contact_groups
   def friendly_time
     created_at.strftime('%A, %b %d')
   end

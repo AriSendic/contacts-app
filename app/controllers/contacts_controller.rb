@@ -6,7 +6,7 @@ class ContactsController < ApplicationController
         @contacts = Contact.where("user_id=? and last_name LIKE ? or first_name LIKE ? ", current_user.id, "%#{params[:search_terms]}%", "%#{params[:search_terms]}%")  
         render 'index.html.erb'    
       elsif params[:groups]
-        @contacts = Group.find_by(name: params[:groups]).contacts 
+        @contacts = Group.find_by(name: params['groups']).contacts.where(user_id: current_user.id)
       else
         @contacts = current_user.contacts
         render 'index.html.erb'
@@ -56,7 +56,7 @@ class ContactsController < ApplicationController
       email: params['email'],
       phone_number: params['phone_number']
     )
-     flash[:success] = "Contact successfully updated"
+    flash[:success] = "Contact successfully updated"
     redirect_to "/contacts/#{contact.id}"
   end
 

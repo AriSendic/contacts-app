@@ -1,0 +1,32 @@
+<h4>
+<%= form_tag url, method: verb do %>
+  <div class="form-group">
+    <%= label_tag :First, "please enter the first name" %>
+    <%= text_field_tag :first_name, @contact.first_name %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :Middle, "please enter the middle name" %>
+    <%= text_field_tag :middle_name, @contact.middle_name %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :Last, "please enter the last name" %>
+    <%= text_field_tag :last_name, @contact.last_name %>
+  </div>
+  <div class="form-group">
+  <%= label_tag :Email, "please enter the email" %>
+    <%= text_field_tag :email, @contact.email %>
+  </div>
+  <div class="form-group">
+  <%= label_tag :Phone, "please enter the phone number" %>
+    <%= text_field_tag :phone_number, @contact.phone_number %>
+  </div>
+  <div class="form-group">
+  <%= label_tag :Bio, "bio:" %>
+    <%= text_field_tag :bio, @contact.bio %>
+  </div>
+  <div>
+    <%= submit_tag 'Send' %>
+ 
+  </div>
+<% end %>
+</h4>

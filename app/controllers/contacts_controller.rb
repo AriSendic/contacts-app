@@ -23,7 +23,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    contact = Contact.new(
+    @contact = Contact.new(
       first_name: params['first_name'],
       middle_name: params['middle_name'],
       last_name: params['last_name'],
@@ -32,9 +32,12 @@ class ContactsController < ApplicationController
       bio: params['bio'],
       user_id: current_user.id
     )
-    contact.save
-    flash[:success] = "Contact successfuly added"
-    redirect_to '/contacts'
+    if @contact.save
+      flash[:success] = "Contact successfuly added"
+      redirect_to '/contacts'
+    else
+      render "new.html.erb"
+    end
   end
   
   def show
@@ -48,16 +51,19 @@ class ContactsController < ApplicationController
   end
   
   def update
-    contact = Contact.find_by(id: params['id'])
-    contact.update(
+    @contact = Contact.find_by(id: params['id'])
+    if @contact.update(
       first_name: params['first_name'],
       middle_name: params['middle_name'],
       last_name: params['last_name'],
       email: params['email'],
       phone_number: params['phone_number']
     )
-    flash[:success] = "Contact successfully updated"
-    redirect_to "/contacts/#{contact.id}"
+      flash[:success] = "Contact successfully updated"
+      redirect_to "/contacts/#{@contact.id}"
+    else
+      render 'edit.html.erb' 
+    end    
   end
 
   def destroy

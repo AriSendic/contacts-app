@@ -1,33 +1,16 @@
-<h1>Enter your new contact</h1>
-<h4>
-<%= form_tag '/contacts', method: :post do %>
-  <div class="form-group">
-    <%= label_tag :First, "please enter the first name" %>
-    <%= text_field_tag :first_name %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :Middle, "please enter the middle name" %>
-    <%= text_field_tag :middle_name %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :Last, "please enter the last name" %>
-    <%= text_field_tag :last_name %>
-  </div>
-  <div class="form-group">
-  <%= label_tag :Email, "please enter the email" %>
-    <%= text_field_tag :email%>
-  </div>
-  <div class="form-group">
-  <%= label_tag :Phone, "please enter the phone number" %>
-    <%= text_field_tag :phone_number %>
-  </div>
-  <div class="form-group">
-  <%= label_tag :Bio, "bio:" %>
-    <%= text_field_tag :bio %>
-  </div>
-  <div>
-    <%= submit_tag 'Send' %>
+<% if @contact.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
  
+    <ul>
+    <% @contact.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
-</h4>
+
+<h1>Enter your new contact</h1>
+
+
+<%= render "form", url: "/contacts", verb: :post %>

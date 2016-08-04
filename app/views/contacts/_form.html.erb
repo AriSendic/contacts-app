@@ -24,6 +24,10 @@
   <%= label_tag :Bio, "bio:" %>
     <%= text_field_tag :bio, @contact.bio %>
   </div>
+  <div class="form-group">
+  <%= label_tag :Address, "address:" %>
+    <%= text_field_tag :address, @contact.address %>
+  </div>
   <div>
     <%= submit_tag 'Send' %>
  

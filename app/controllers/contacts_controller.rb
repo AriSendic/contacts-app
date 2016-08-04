@@ -23,6 +23,14 @@ class ContactsController < ApplicationController
   end
 
   def create
+    latlong = Geocoder.coordinates(params[:address])
+    if latlong
+      computed_latitude = latlong[0]
+      computed_longitude = latlong[1]
+    else
+      computed_latitude = nil
+      computed_longitude = nil
+    end   
     @contact = Contact.new(
       first_name: params['first_name'],
       middle_name: params['middle_name'],
@@ -30,6 +38,9 @@ class ContactsController < ApplicationController
       phone_number: params['phone_number'],
       email: params['email'],
       bio: params['bio'],
+      address: params['address'],
+      latitude: computed_latitude,
+      longitude: computed_longitude,
       user_id: current_user.id
     )
     if @contact.save
